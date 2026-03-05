@@ -39,11 +39,6 @@ const TileTypesSection = () => {
             </tbody>
           </table>
         </div>
-        <div className="mt-8 bg-card rounded-lg p-6 border border-border shadow-card">
-          <p className="text-muted-foreground font-body text-sm leading-relaxed">
-            <strong className="text-foreground font-heading">Совет мастера:</strong> Вибролитую плитку покупают из-за яркого цвета, но через 3–4 зимы поверхность шелушится. Мы рекомендуем вибропрессованную — пигмент распределён по всей толщине, морозостойкость от F200 циклов по СТБ 1071.
-          </p>
-        </div>
       </div>
     </section>
   );

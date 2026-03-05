@@ -14,8 +14,8 @@ const HeroSection = () => {
       <div className="relative z-10 container mx-auto px-4 py-20">
         <div className="max-w-3xl">
           <div className="inline-block bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-full px-4 py-1.5 mb-6">
-            <span className="text-primary-foreground text-sm font-medium font-heading">
-              Опыт с 2007 года • Гарантия до 5 лет
+             <span className="text-primary-foreground text-sm font-medium font-heading">
+              Работаем с 30.07.2015 г. • Высокое качество работ
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black font-heading text-primary-foreground leading-tight mb-6">
@@ -25,7 +25,7 @@ const HeroSection = () => {
             Цена от <span className="font-bold text-accent">15 бел. руб./м²</span>
           </p>
           <p className="text-lg text-primary-foreground/80 font-body mb-8 max-w-2xl">
-            Бригады с опытом от 15 лет, договор, гарантия на работы до 5 лет. Без предоплаты — оплата по факту.
+            Бригады с опытом от 15 лет, договор, качественное выполнение работ. Без предоплаты — оплата по факту.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a
