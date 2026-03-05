@@ -4,8 +4,6 @@ import AdvantagesSection from "@/components/AdvantagesSection";
 import StagesSection from "@/components/StagesSection";
 import TileTypesSection from "@/components/TileTypesSection";
 import PriceCalculator from "@/components/PriceCalculator";
-import ExamplesSection from "@/components/ExamplesSection";
-import ExperienceSection from "@/components/ExperienceSection";
 import FAQSection from "@/components/FAQSection";
 import AboutSection from "@/components/AboutSection";
 import ContactsSection from "@/components/ContactsSection";
@@ -20,8 +18,6 @@ const Index = () => {
       <StagesSection />
       <TileTypesSection />
       <PriceCalculator />
-      <ExamplesSection />
-      <ExperienceSection />
       <FAQSection />
       <AboutSection />
       <ContactsSection />
