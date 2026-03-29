@@ -25,7 +25,7 @@ const HeroSection = () => {
             Цена от <span className="font-bold text-accent">15 бел. руб./м²</span>
           </p>
           <p className="text-lg text-primary-foreground/80 font-body mb-8 max-w-2xl">
-            Бригады с опытом от 15 лет, договор, качественное выполнение работ. Без предоплаты — оплата по факту.
+            Договор, качественное выполнение работ. Без предоплаты — оплата по факту.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a

@@ -3,7 +3,7 @@ import { Shield, Clock, Users, Wrench, PhoneCall, FileText, Percent } from "luci
 const advantages = [
   { icon: FileText, title: "Без предоплаты", desc: "Оплата по факту выполнения этапа, зафиксированного в договоре." },
   { icon: Shield, title: "Качество работ", desc: "Выполняем работы качественно — просадки, расхождение швов и разрушение покрытия исключены." },
-  { icon: Users, title: "Опытные мастера", desc: "Средний стаж бригады более 15 лет, профильное образование." },
+  
   { icon: Wrench, title: "Работа под ключ", desc: "От выемки грунта до установки дождеприемников, включая закупку материалов." },
   { icon: PhoneCall, title: "Консультация мастера", desc: "Предварительный выезд для оценки основания, расчёт по фото." },
   { icon: Clock, title: "Без скрытых доплат", desc: "Смета согласовывается до начала работ, все позиции в договоре." },
@@ -33,11 +33,6 @@ const AdvantagesSection = () => {
               <p className="text-muted-foreground text-sm font-body">{a.desc}</p>
             </div>
           ))}
-        </div>
-        <div className="mt-12 bg-secondary rounded-lg p-6 md:p-8">
-          <p className="text-secondary-foreground font-body leading-relaxed">
-            <strong className="font-heading">Цена ошибки:</strong> отсутствие уплотнения основания приводит к просадке уже через 1–2 зимы, а экономия 2–3 бел. руб./м² на геотекстиле оборачивается полной переделкой покрытия. ИП Якутчик А.С. защищает от таких рисков договором и качественным выполнением каждого этапа.
-          </p>
         </div>
       </div>
     </section>

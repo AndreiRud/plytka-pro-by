@@ -18,7 +18,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-secondary/95 backdrop-blur-md border-b border-secondary-foreground/10">
       <div className="container mx-auto px-4 flex items-center justify-between h-16">
         <a href="#" className="font-heading font-black text-lg text-secondary-foreground">
-          ИП Якутчик <span className="text-accent">А.С.</span>
+          Укладка тротуарной <span className="text-accent">плитки</span>
         </a>
         <div className="hidden lg:flex items-center gap-6">
           {navLinks.map(l => (
