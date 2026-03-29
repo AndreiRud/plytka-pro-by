@@ -1,9 +1,8 @@
-import { Shield, Clock, Users, Wrench, PhoneCall, FileText, Percent } from "lucide-react";
+import { Shield, Clock, Wrench, PhoneCall, FileText, Percent } from "lucide-react";
 
 const advantages = [
   { icon: FileText, title: "Без предоплаты", desc: "Оплата по факту выполнения этапа, зафиксированного в договоре." },
   { icon: Shield, title: "Качество работ", desc: "Выполняем работы качественно — просадки, расхождение швов и разрушение покрытия исключены." },
-  
   { icon: Wrench, title: "Работа под ключ", desc: "От выемки грунта до установки дождеприемников, включая закупку материалов." },
   { icon: PhoneCall, title: "Консультация мастера", desc: "Предварительный выезд для оценки основания, расчёт по фото." },
   { icon: Clock, title: "Без скрытых доплат", desc: "Смета согласовывается до начала работ, все позиции в договоре." },
@@ -12,25 +11,22 @@ const advantages = [
 
 const AdvantagesSection = () => {
   return (
-    <section id="advantages" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold font-heading text-center mb-4">
+    <section id="advantages" className="section section-light">
+      <div className="container">
+        <h2 className="section-title">
           Наши <span className="text-gradient">преимущества</span>
         </h2>
-        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12 font-body">
+        <p className="section-subtitle">
           Покрытие со сроком службы 15–30 лет благодаря технологии послойного уплотнения виброплитой
         </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="advantages-grid">
           {advantages.map((a, i) => (
-            <div
-              key={i}
-              className="bg-card rounded-lg p-6 shadow-card hover:shadow-card-hover transition-shadow border border-border group"
-            >
-              <div className="w-12 h-12 rounded-lg bg-gradient-warm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <a.icon className="w-6 h-6 text-primary-foreground" />
+            <div key={i} className="advantage-card">
+              <div className="advantage-icon">
+                <a.icon />
               </div>
-              <h3 className="font-heading font-bold text-lg mb-2">{a.title}</h3>
-              <p className="text-muted-foreground text-sm font-body">{a.desc}</p>
+              <h3 className="advantage-title">{a.title}</h3>
+              <p className="advantage-desc">{a.desc}</p>
             </div>
           ))}
         </div>

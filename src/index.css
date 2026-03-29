@@ -8,44 +8,24 @@
   :root {
     --background: 40 20% 97%;
     --foreground: 220 20% 14%;
-
     --card: 0 0% 100%;
     --card-foreground: 220 20% 14%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 220 20% 14%;
-
     --primary: 25 85% 48%;
     --primary-foreground: 0 0% 100%;
-
     --secondary: 220 16% 22%;
     --secondary-foreground: 0 0% 100%;
-
     --muted: 40 15% 92%;
     --muted-foreground: 220 10% 46%;
-
     --accent: 38 92% 50%;
     --accent-foreground: 220 20% 14%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-
     --border: 40 15% 88%;
     --input: 40 15% 88%;
     --ring: 25 85% 48%;
-
     --radius: 0.75rem;
-
-    --hero-overlay: linear-gradient(135deg, hsla(220, 20%, 14%, 0.85) 0%, hsla(25, 85%, 48%, 0.6) 100%);
-    --gradient-warm: linear-gradient(135deg, hsl(25, 85%, 48%), hsl(38, 92%, 50%));
-    --gradient-dark: linear-gradient(135deg, hsl(220, 16%, 22%), hsl(220, 20%, 14%));
-    --shadow-card: 0 4px 24px -4px hsla(220, 20%, 14%, 0.08);
-    --shadow-card-hover: 0 8px 32px -4px hsla(25, 85%, 48%, 0.15);
-    --shadow-hero: 0 20px 60px -10px hsla(25, 85%, 48%, 0.3);
-
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Open Sans', sans-serif;
-
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -63,36 +43,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-body);
-  }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-  }
-}
-
-@layer utilities {
-  .text-gradient {
-    background: var(--gradient-warm);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .bg-hero-overlay {
-    background: var(--hero-overlay);
-  }
-  .bg-gradient-warm {
-    background: var(--gradient-warm);
-  }
-  .bg-gradient-dark {
-    background: var(--gradient-dark);
-  }
-  .shadow-card {
-    box-shadow: var(--shadow-card);
-  }
-  .shadow-card-hover {
-    box-shadow: var(--shadow-card-hover);
-  }
-  .shadow-hero {
-    box-shadow: var(--shadow-hero);
+    font-family: 'Open Sans', sans-serif;
   }
 }

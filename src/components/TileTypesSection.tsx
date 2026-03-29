@@ -7,31 +7,31 @@ const tileTypes = [
 
 const TileTypesSection = () => {
   return (
-    <section id="tile-types" className="py-20 bg-muted">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold font-heading text-center mb-4">
+    <section id="tile-types" className="section section-muted">
+      <div className="container">
+        <h2 className="section-title">
           Виды тротуарной <span className="text-gradient">плитки</span>
         </h2>
-        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12 font-body">
+        <p className="section-subtitle">
           Подбираем покрытие под нагрузку и бюджет
         </p>
-        <div className="overflow-x-auto">
-          <table className="w-full bg-card rounded-lg overflow-hidden shadow-card border border-border">
+        <div className="tile-table-wrap">
+          <table className="tile-table">
             <thead>
-              <tr className="bg-gradient-dark">
-                <th className="text-left p-4 font-heading font-semibold text-secondary-foreground text-sm">Вид плитки</th>
-                <th className="text-left p-4 font-heading font-semibold text-secondary-foreground text-sm">Толщина</th>
-                <th className="text-left p-4 font-heading font-semibold text-secondary-foreground text-sm">Назначение</th>
-                <th className="text-right p-4 font-heading font-semibold text-secondary-foreground text-sm">Укладка, бел. руб./м²</th>
+              <tr>
+                <th>Вид плитки</th>
+                <th>Толщина</th>
+                <th>Назначение</th>
+                <th>Укладка, бел. руб./м²</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
+            <tbody>
               {tileTypes.map((t, i) => (
-                <tr key={i} className="hover:bg-muted/50 transition-colors">
-                  <td className="p-4 font-heading font-bold text-sm">{t.name}</td>
-                  <td className="p-4 text-muted-foreground text-sm font-body">{t.thickness}</td>
-                  <td className="p-4 text-muted-foreground text-sm font-body">{t.purpose}</td>
-                  <td className="p-4 text-right font-heading font-bold text-primary text-sm">{t.price}</td>
+                <tr key={i}>
+                  <td className="tile-name">{t.name}</td>
+                  <td className="tile-muted">{t.thickness}</td>
+                  <td className="tile-muted">{t.purpose}</td>
+                  <td className="tile-price">{t.price}</td>
                 </tr>
               ))}
             </tbody>
