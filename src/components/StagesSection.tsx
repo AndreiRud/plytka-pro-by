@@ -10,37 +10,35 @@ const stages = [
 
 const StagesSection = () => {
   return (
-    <section id="stages" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold font-heading text-center mb-4">
+    <section id="stages" className="section section-light">
+      <div className="container">
+        <h2 className="section-title">
           Как мы <span className="text-gradient">работаем</span>
         </h2>
-         <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12 font-body">
+        <p className="section-subtitle">
           7 этапов для долговечного покрытия — каждый контролируется
         </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="stages-grid">
           {stages.map((s, i) => (
-            <div key={i} className="relative bg-card rounded-lg p-6 border border-border shadow-card hover:shadow-card-hover transition-shadow group">
-              <span className="text-5xl font-black font-heading text-gradient opacity-30 group-hover:opacity-60 transition-opacity absolute top-4 right-4">
-                {s.num}
-              </span>
-              <h3 className="font-heading font-bold text-base mb-3 pr-12">{s.title}</h3>
-              <p className="text-muted-foreground text-sm font-body leading-relaxed">{s.desc}</p>
+            <div key={i} className="stage-card">
+              <span className="stage-num">{s.num}</span>
+              <h3 className="stage-title">{s.title}</h3>
+              <p className="stage-desc">{s.desc}</p>
             </div>
           ))}
         </div>
-        <div className="mt-10 grid md:grid-cols-3 gap-6 text-center">
-          <div className="bg-muted rounded-lg p-6">
-            <p className="text-2xl font-black font-heading text-gradient">3–5 дней</p>
-            <p className="text-muted-foreground text-sm font-body mt-1">50 м² дорожек</p>
+        <div className="stages-stats">
+          <div className="stages-stat">
+            <p className="stages-stat-value">3–5 дней</p>
+            <p className="stages-stat-label">50 м² дорожек</p>
           </div>
-          <div className="bg-muted rounded-lg p-6">
-            <p className="text-2xl font-black font-heading text-gradient">7–10 дней</p>
-            <p className="text-muted-foreground text-sm font-body mt-1">100 м² двора</p>
+          <div className="stages-stat">
+            <p className="stages-stat-value">7–10 дней</p>
+            <p className="stages-stat-label">100 м² двора</p>
           </div>
-          <div className="bg-muted rounded-lg p-6">
-            <p className="text-2xl font-black font-heading text-gradient">от 14 дней</p>
-            <p className="text-muted-foreground text-sm font-body mt-1">200 м² и более</p>
+          <div className="stages-stat">
+            <p className="stages-stat-value">от 14 дней</p>
+            <p className="stages-stat-label">200 м² и более</p>
           </div>
         </div>
       </div>

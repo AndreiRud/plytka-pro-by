@@ -1,6 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Calculator } from "lucide-react";
-import "./PriceCalculator.css";
 
 const priceItems = [
   { name: "Укладка тротуарной плитки на готовое основание", unit: "м²", price: 15, category: "Укладка" },
@@ -63,7 +62,6 @@ const PriceCalculator = () => {
         const i = parseInt(inp.dataset.idx!);
         const item = priceItems[i];
         const row = inp.closest(".calc-row") as HTMLDivElement;
-
         if (qty > 0) {
           sum += item.price * qty;
           html += '<div class="calc-summary-row"><span class="calc-summary-name">' + item.name + '</span><span class="calc-summary-val">' + qty + " " + item.unit + " × " + item.price + " = " + (qty * item.price).toFixed(0) + " р.</span></div>";
@@ -72,7 +70,6 @@ const PriceCalculator = () => {
           row.classList.remove("selected");
         }
       });
-
       list.innerHTML = html;
       list.style.display = html ? "" : "none";
       empty.style.display = html ? "none" : "";
@@ -98,15 +95,13 @@ const PriceCalculator = () => {
     });
 
     inputs.forEach(inp => inp.addEventListener("input", update));
-
     showTab(categories[0]);
     update();
   }, []);
 
   return (
     <section id="calculator" className="calc-section">
-      <div className="container mx-auto px-4" ref={root}>
-
+      <div className="container" ref={root}>
         <div className="calc-header">
           <div className="calc-badge">
             <Calculator size={16} />
@@ -166,7 +161,6 @@ const PriceCalculator = () => {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
