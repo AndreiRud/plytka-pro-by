@@ -1,15 +1,7 @@
-import { useState, useMemo } from "react";
-import { Calculator, Plus, Minus } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { Calculator } from "lucide-react";
 
-interface PriceItem {
-  name: string;
-  unit: string;
-  price: number;
-  note?: string;
-  category: string;
-}
-
-const priceItems: PriceItem[] = [
+const priceItems = [
   { name: "Укладка тротуарной плитки на готовое основание", unit: "м²", price: 15, category: "Укладка" },
   { name: "Укладка плитки, круговая выкладка", unit: "м²", price: 20, category: "Укладка" },
   { name: "Укладка плитки, сложный рисунок", unit: "м²", price: 20, category: "Укладка" },
@@ -41,45 +33,93 @@ const priceItems: PriceItem[] = [
   { name: "Приготовление смесей вручную", unit: "м³", price: 40, category: "Земляные работы" },
 ];
 
+const categories = [...new Set(priceItems.map(i => i.category))];
+
 const PriceCalculator = () => {
-  const [quantities, setQuantities] = useState<Record<number, number>>({});
-  const [activeCategory, setActiveCategory] = useState("Укладка");
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const categories = useMemo(() => [...new Set(priceItems.map(i => i.category))], []);
+  useEffect(() => {
+    const root = containerRef.current;
+    if (!root) return;
 
-  const updateQty = (index: number, delta: number) => {
-    setQuantities(prev => {
-      const current = prev[index] || 0;
-      const next = Math.max(0, current + delta);
-      if (next === 0) {
-        const { [index]: _, ...rest } = prev;
-        return rest;
-      }
-      return { ...prev, [index]: next };
+    // --- Pure JS calculator logic ---
+    const tabBtns = root.querySelectorAll<HTMLButtonElement>("[data-tab-btn]");
+    const tabPanels = root.querySelectorAll<HTMLDivElement>("[data-tab-panel]");
+    const inputs = root.querySelectorAll<HTMLInputElement>("[data-qty-input]");
+    const minusBtns = root.querySelectorAll<HTMLButtonElement>("[data-minus]");
+    const plusBtns = root.querySelectorAll<HTMLButtonElement>("[data-plus]");
+    const summaryList = root.querySelector<HTMLDivElement>("[data-summary-list]")!;
+    const summaryEmpty = root.querySelector<HTMLParagraphElement>("[data-summary-empty]")!;
+    const totalEl = root.querySelector<HTMLSpanElement>("[data-total]")!;
+
+    function switchTab(cat: string) {
+      tabBtns.forEach(btn => {
+        const active = btn.dataset.tabBtn === cat;
+        btn.className = active
+          ? "px-4 py-2 rounded-lg font-heading font-semibold text-sm transition-all bg-gradient-warm text-primary-foreground shadow-hero"
+          : "px-4 py-2 rounded-lg font-heading font-semibold text-sm transition-all bg-card text-foreground border border-border hover:border-primary/30";
+      });
+      tabPanels.forEach(p => {
+        p.style.display = p.dataset.tabPanel === cat ? "" : "none";
+      });
+    }
+
+    function recalc() {
+      let total = 0;
+      let html = "";
+      inputs.forEach(inp => {
+        const qty = parseInt(inp.value) || 0;
+        const idx = parseInt(inp.dataset.qtyInput!);
+        const item = priceItems[idx];
+        const row = inp.closest("[data-row]") as HTMLDivElement;
+        if (qty > 0) {
+          total += item.price * qty;
+          html += `<div class="flex justify-between text-sm font-body"><span class="text-muted-foreground truncate mr-2">${item.name}</span><span class="font-semibold whitespace-nowrap">${qty} ${item.unit} × ${item.price} = ${(qty * item.price).toFixed(0)} р.</span></div>`;
+          row.classList.add("bg-primary/5");
+          row.classList.remove("hover:bg-muted/50");
+        } else {
+          row.classList.remove("bg-primary/5");
+          row.classList.add("hover:bg-muted/50");
+        }
+      });
+      summaryList.innerHTML = html;
+      summaryList.style.display = html ? "" : "none";
+      summaryEmpty.style.display = html ? "none" : "";
+      totalEl.textContent = total.toFixed(0) + " бел. руб.";
+    }
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener("click", () => switchTab(btn.dataset.tabBtn!));
     });
-  };
 
-  const setQty = (index: number, value: number) => {
-    setQuantities(prev => {
-      if (value <= 0) {
-        const { [index]: _, ...rest } = prev;
-        return rest;
-      }
-      return { ...prev, [index]: value };
+    minusBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const inp = btn.parentElement!.querySelector("input") as HTMLInputElement;
+        inp.value = String(Math.max(0, (parseInt(inp.value) || 0) - 1));
+        recalc();
+      });
     });
-  };
 
-  const total = useMemo(() => {
-    return Object.entries(quantities).reduce((sum, [idx, qty]) => {
-      return sum + priceItems[Number(idx)].price * qty;
-    }, 0);
-  }, [quantities]);
+    plusBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const inp = btn.parentElement!.querySelector("input") as HTMLInputElement;
+        inp.value = String((parseInt(inp.value) || 0) + 1);
+        recalc();
+      });
+    });
 
-  const selectedItems = Object.entries(quantities).filter(([, qty]) => qty > 0);
+    inputs.forEach(inp => {
+      inp.addEventListener("input", recalc);
+    });
+
+    // Init: show first tab
+    switchTab(categories[0]);
+    recalc();
+  }, []);
 
   return (
     <section id="calculator" className="py-20 bg-muted">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4" ref={containerRef}>
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-gradient-warm text-primary-foreground rounded-full px-4 py-1.5 mb-4">
             <Calculator className="w-4 h-4" />
@@ -92,109 +132,61 @@ const PriceCalculator = () => {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Price list */}
           <div className="lg:col-span-2">
-            {/* Category tabs */}
+            {/* Tab buttons */}
             <div className="flex flex-wrap gap-2 mb-6">
               {categories.map(cat => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 rounded-lg font-heading font-semibold text-sm transition-all ${
-                    activeCategory === cat
-                      ? "bg-gradient-warm text-primary-foreground shadow-hero"
-                      : "bg-card text-foreground border border-border hover:border-primary/30"
-                  }`}
-                >
+                <button key={cat} data-tab-btn={cat} className="px-4 py-2 rounded-lg font-heading font-semibold text-sm transition-all bg-card text-foreground border border-border hover:border-primary/30">
                   {cat}
                 </button>
               ))}
             </div>
 
-            <div className="bg-card rounded-lg border border-border overflow-hidden">
-              <div className="divide-y divide-border">
-                {priceItems
-                  .map((item, originalIndex) => ({ item, originalIndex }))
-                  .filter(({ item }) => item.category === activeCategory)
-                  .map(({ item, originalIndex }) => {
-                    const qty = quantities[originalIndex] || 0;
+            {/* All tab panels rendered in HTML, hidden/shown via JS */}
+            {categories.map(cat => (
+              <div key={cat} data-tab-panel={cat} className="bg-card rounded-lg border border-border overflow-hidden" style={{ display: "none" }}>
+                <div className="divide-y divide-border">
+                  {priceItems.map((item, idx) => {
+                    if (item.category !== cat) return null;
                     return (
-                      <div
-                        key={originalIndex}
-                        className={`flex items-center gap-4 p-4 transition-colors ${qty > 0 ? "bg-primary/5" : "hover:bg-muted/50"}`}
-                      >
+                      <div key={idx} data-row="" className="flex items-center gap-4 p-4 transition-colors hover:bg-muted/50">
                         <div className="flex-1 min-w-0">
                           <p className="font-body text-sm md:text-base font-medium truncate">{item.name}</p>
-                          <p className="text-muted-foreground text-xs mt-0.5">
-                            от {item.price} бел. руб./{item.unit}
-                          </p>
+                          <p className="text-muted-foreground text-xs mt-0.5">от {item.price} бел. руб./{item.unit}</p>
                         </div>
                         <div className="flex items-center gap-2 shrink-0">
-                          <button
-                            onClick={() => updateQty(originalIndex, -1)}
-                            className="w-8 h-8 rounded-md bg-muted flex items-center justify-center hover:bg-border transition-colors"
-                          >
-                            <Minus className="w-4 h-4" />
+                          <button data-minus="" className="w-8 h-8 rounded-md bg-muted flex items-center justify-center hover:bg-border transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/></svg>
                           </button>
-                          <input
-                            type="number"
-                            min={0}
-                            value={qty}
-                            onChange={e => setQty(originalIndex, Number(e.target.value) || 0)}
-                            className="w-16 h-8 text-center rounded-md border border-border bg-background font-heading font-semibold text-sm"
-                          />
-                          <button
-                            onClick={() => updateQty(originalIndex, 1)}
-                            className="w-8 h-8 rounded-md bg-primary text-primary-foreground flex items-center justify-center hover:opacity-80 transition-opacity"
-                          >
-                            <Plus className="w-4 h-4" />
+                          <input type="number" min={0} defaultValue={0} data-qty-input={idx} className="w-16 h-8 text-center rounded-md border border-border bg-background font-heading font-semibold text-sm" />
+                          <button data-plus="" className="w-8 h-8 rounded-md bg-primary text-primary-foreground flex items-center justify-center hover:opacity-80 transition-opacity">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                           </button>
                         </div>
                       </div>
                     );
                   })}
+                </div>
               </div>
-            </div>
+            ))}
           </div>
 
           {/* Summary */}
           <div className="lg:col-span-1">
             <div className="sticky top-4 bg-card rounded-lg border border-border p-6 shadow-card">
               <h3 className="font-heading font-bold text-lg mb-4">Ваша смета</h3>
-              {selectedItems.length === 0 ? (
-                <p className="text-muted-foreground text-sm font-body">Добавьте позиции из прайса, чтобы рассчитать стоимость</p>
-              ) : (
-                <div className="space-y-3 mb-6">
-                  {selectedItems.map(([idx, qty]) => {
-                    const item = priceItems[Number(idx)];
-                    return (
-                      <div key={idx} className="flex justify-between text-sm font-body">
-                        <span className="text-muted-foreground truncate mr-2">{item.name}</span>
-                        <span className="font-semibold whitespace-nowrap">
-                          {qty} {item.unit} × {item.price} = {(qty * item.price).toFixed(0)} р.
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
+              <p data-summary-empty="" className="text-muted-foreground text-sm font-body">Добавьте позиции из прайса, чтобы рассчитать стоимость</p>
+              <div data-summary-list="" className="space-y-3 mb-6" style={{ display: "none" }}></div>
               <div className="border-t border-border pt-4">
                 <div className="flex justify-between items-center">
                   <span className="font-heading font-bold text-lg">Итого от:</span>
-                  <span className="text-2xl font-black font-heading text-gradient">
-                    {total.toFixed(0)} бел. руб.
-                  </span>
+                  <span data-total="" className="text-2xl font-black font-heading text-gradient">0 бел. руб.</span>
                 </div>
               </div>
-              <a
-                href="tel:+375291234567"
-                className="mt-6 w-full inline-flex items-center justify-center gap-2 bg-gradient-warm text-primary-foreground font-heading font-bold px-6 py-3 rounded-lg shadow-hero hover:opacity-90 transition-opacity"
-              >
+              <a href="tel:+375291234567" className="mt-6 w-full inline-flex items-center justify-center gap-2 bg-gradient-warm text-primary-foreground font-heading font-bold px-6 py-3 rounded-lg shadow-hero hover:opacity-90 transition-opacity">
                 Уточнить стоимость
               </a>
-              <p className="text-xs text-muted-foreground text-center mt-3 font-body">
-                Точная стоимость определяется после осмотра объекта
-              </p>
+              <p className="text-xs text-muted-foreground text-center mt-3 font-body">Точная стоимость определяется после осмотра объекта</p>
             </div>
           </div>
         </div>
