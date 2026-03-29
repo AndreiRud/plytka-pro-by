@@ -26,11 +26,6 @@ const AboutSection = () => {
             <p className="font-body text-muted-foreground leading-relaxed">
               Работаем по договору с физическими лицами и организациями. Безналичный расчёт с НДС и без НДС. Акты выполненных работ, сметная документация.
             </p>
-            <div className="bg-muted rounded-lg p-5 mt-4">
-              <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                <strong className="text-foreground font-heading">Инженерный секрет:</strong> определить качество вибропрессованной плитки можно по весу и звуку. Кирпичик 200×100×60 мм должен весить не менее 2,4 кг. При ударе друг о друга — звонкий «стеклянный» звук. Глухой звук и вес менее 2 кг — признак нарушения технологии.
-              </p>
-            </div>
           </div>
         </div>
       </div>

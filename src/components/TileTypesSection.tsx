@@ -3,8 +3,6 @@ const tileTypes = [
   { name: "Старый город", thickness: "6–8 см", purpose: "Дворовые площадки, зоны отдыха", price: "от 16" },
   { name: "Колормикс", thickness: "6–8 см", purpose: "Декоративное мощение в несколько цветов", price: "от 16" },
   { name: "Катушка", thickness: "8 см", purpose: "Площадки средней нагрузки", price: "от 17" },
-  { name: "Клинкерная", thickness: "5–7 см", purpose: "Премиум-покрытие, парадные зоны", price: "от 30" },
-  { name: "Гранитная", thickness: "5–10 см", purpose: "Въезды для грузового транспорта", price: "от 30" },
 ];
 
 const TileTypesSection = () => {

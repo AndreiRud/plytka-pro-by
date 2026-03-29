@@ -34,11 +34,6 @@ const AdvantagesSection = () => {
             </div>
           ))}
         </div>
-        <div className="mt-12 bg-secondary rounded-lg p-6 md:p-8">
-          <p className="text-secondary-foreground font-body leading-relaxed">
-            <strong className="font-heading">Цена ошибки:</strong> отсутствие уплотнения основания приводит к просадке уже через 1–2 зимы, а экономия 2–3 бел. руб./м² на геотекстиле оборачивается полной переделкой покрытия. ИП Якутчик А.С. защищает от таких рисков договором и качественным выполнением каждого этапа.
-          </p>
-        </div>
       </div>
     </section>
   );
