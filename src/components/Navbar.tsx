@@ -11,6 +11,17 @@ const navLinks = [
   { href: "#contacts", label: "Контакты" },
 ];
 
+const TileLogo = () => (
+  <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="2" width="14" height="10" rx="1.5" fill="#e69b00" stroke="#c2601a" strokeWidth="1"/>
+    <rect x="18" y="2" width="16" height="10" rx="1.5" fill="#c2601a" stroke="#a04e10" strokeWidth="1"/>
+    <rect x="2" y="14" width="10" height="10" rx="1.5" fill="#c2601a" stroke="#a04e10" strokeWidth="1"/>
+    <rect x="14" y="14" width="20" height="10" rx="1.5" fill="#e69b00" stroke="#c2601a" strokeWidth="1"/>
+    <rect x="2" y="26" width="18" height="8" rx="1.5" fill="#d4782a" stroke="#c2601a" strokeWidth="1"/>
+    <rect x="22" y="26" width="12" height="8" rx="1.5" fill="#c2601a" stroke="#a04e10" strokeWidth="1"/>
+  </svg>
+);
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
@@ -18,7 +29,8 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="container navbar-inner">
         <a href="#" className="navbar-logo">
-          Укладка тротуарной <span>плитки</span>
+          <TileLogo />
+          <span style={{ marginLeft: 10 }}>Укладка тротуарной <span>плитки</span></span>
         </a>
         <div className="navbar-links">
           {navLinks.map(l => (
