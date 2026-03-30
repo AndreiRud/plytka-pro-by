@@ -1,39 +1,64 @@
+/* Кирпичик — прямоугольные кирпичи 2:1, ёлочкой */
 const BrickSvg = () => (
-  <svg width="48" height="32" viewBox="0 0 48 32" fill="none">
-    <rect x="1" y="1" width="22" height="14" rx="1" fill="#d4782a" stroke="#a04e10" strokeWidth="1"/>
-    <rect x="25" y="1" width="22" height="14" rx="1" fill="#c2601a" stroke="#a04e10" strokeWidth="1"/>
-    <rect x="1" y="17" width="22" height="14" rx="1" fill="#c2601a" stroke="#a04e10" strokeWidth="1"/>
-    <rect x="25" y="17" width="22" height="14" rx="1" fill="#d4782a" stroke="#a04e10" strokeWidth="1"/>
+  <svg width="56" height="40" viewBox="0 0 56 40" fill="none">
+    {/* Ёлочка — ряд наклонных кирпичей */}
+    <rect x="2" y="2" width="18" height="9" rx="1" fill="#d4782a" stroke="#a04e10" strokeWidth=".7"/>
+    <rect x="22" y="2" width="18" height="9" rx="1" fill="#c2601a" stroke="#8a3e0e" strokeWidth=".7"/>
+    <rect x="42" y="2" width="12" height="9" rx="1" fill="#d4782a" stroke="#a04e10" strokeWidth=".7"/>
+    <rect x="2" y="13" width="12" height="9" rx="1" fill="#c2601a" stroke="#8a3e0e" strokeWidth=".7"/>
+    <rect x="16" y="13" width="18" height="9" rx="1" fill="#d4782a" stroke="#a04e10" strokeWidth=".7"/>
+    <rect x="36" y="13" width="18" height="9" rx="1" fill="#c2601a" stroke="#8a3e0e" strokeWidth=".7"/>
+    <rect x="2" y="24" width="18" height="9" rx="1" fill="#d4782a" stroke="#a04e10" strokeWidth=".7"/>
+    <rect x="22" y="24" width="18" height="9" rx="1" fill="#c2601a" stroke="#8a3e0e" strokeWidth=".7"/>
+    <rect x="42" y="24" width="12" height="9" rx="1" fill="#d4782a" stroke="#a04e10" strokeWidth=".7"/>
   </svg>
 );
 
+/* Старый город — 3 разных размера плитки вперемешку */
 const OldTownSvg = () => (
-  <svg width="48" height="32" viewBox="0 0 48 32" fill="none">
-    <rect x="1" y="1" width="14" height="14" rx="1" fill="#c2601a" stroke="#a04e10" strokeWidth="1"/>
-    <rect x="17" y="1" width="10" height="14" rx="1" fill="#e69b00" stroke="#c2601a" strokeWidth="1"/>
-    <rect x="29" y="1" width="18" height="14" rx="1" fill="#d4782a" stroke="#a04e10" strokeWidth="1"/>
-    <rect x="1" y="17" width="18" height="14" rx="1" fill="#e69b00" stroke="#c2601a" strokeWidth="1"/>
-    <rect x="21" y="17" width="12" height="14" rx="1" fill="#c2601a" stroke="#a04e10" strokeWidth="1"/>
-    <rect x="35" y="17" width="12" height="14" rx="1" fill="#d4782a" stroke="#a04e10" strokeWidth="1"/>
+  <svg width="56" height="40" viewBox="0 0 56 40" fill="none">
+    {/* Верхний ряд: большая + средняя + маленькая */}
+    <rect x="2" y="2" width="20" height="11" rx="1" fill="#c2601a" stroke="#8a3e0e" strokeWidth=".7"/>
+    <rect x="24" y="2" width="14" height="11" rx="1" fill="#d4782a" stroke="#a04e10" strokeWidth=".7"/>
+    <rect x="40" y="2" width="14" height="11" rx="1" fill="#b35518" stroke="#8a3e0e" strokeWidth=".7"/>
+    {/* Средний ряд: маленькая + большая + средняя */}
+    <rect x="2" y="15" width="11" height="11" rx="1" fill="#d4782a" stroke="#a04e10" strokeWidth=".7"/>
+    <rect x="15" y="15" width="11" height="11" rx="1" fill="#b35518" stroke="#8a3e0e" strokeWidth=".7"/>
+    <rect x="28" y="15" width="14" height="11" rx="1" fill="#c2601a" stroke="#8a3e0e" strokeWidth=".7"/>
+    <rect x="44" y="15" width="10" height="11" rx="1" fill="#d4782a" stroke="#a04e10" strokeWidth=".7"/>
+    {/* Нижний ряд */}
+    <rect x="2" y="28" width="16" height="10" rx="1" fill="#b35518" stroke="#8a3e0e" strokeWidth=".7"/>
+    <rect x="20" y="28" width="20" height="10" rx="1" fill="#d4782a" stroke="#a04e10" strokeWidth=".7"/>
+    <rect x="42" y="28" width="12" height="10" rx="1" fill="#c2601a" stroke="#8a3e0e" strokeWidth=".7"/>
   </svg>
 );
 
+/* Колормикс — одинаковые кирпичи, но разных цветов */
 const ColormixSvg = () => (
-  <svg width="48" height="32" viewBox="0 0 48 32" fill="none">
-    <rect x="1" y="1" width="14" height="14" rx="1" fill="#e69b00" stroke="#c2601a" strokeWidth="1"/>
-    <rect x="17" y="1" width="14" height="14" rx="1" fill="#c2601a" stroke="#a04e10" strokeWidth="1"/>
-    <rect x="33" y="1" width="14" height="14" rx="1" fill="#b35518" stroke="#8a3e0e" strokeWidth="1"/>
-    <rect x="1" y="17" width="14" height="14" rx="1" fill="#c2601a" stroke="#a04e10" strokeWidth="1"/>
-    <rect x="17" y="17" width="14" height="14" rx="1" fill="#b35518" stroke="#8a3e0e" strokeWidth="1"/>
-    <rect x="33" y="17" width="14" height="14" rx="1" fill="#e69b00" stroke="#c2601a" strokeWidth="1"/>
+  <svg width="56" height="40" viewBox="0 0 56 40" fill="none">
+    <rect x="2" y="2" width="16" height="9" rx="1" fill="#e69b00" stroke="#c2601a" strokeWidth=".7"/>
+    <rect x="20" y="2" width="16" height="9" rx="1" fill="#c2601a" stroke="#8a3e0e" strokeWidth=".7"/>
+    <rect x="38" y="2" width="16" height="9" rx="1" fill="#8b4513" stroke="#6b3410" strokeWidth=".7"/>
+    <rect x="2" y="13" width="16" height="9" rx="1" fill="#c2601a" stroke="#8a3e0e" strokeWidth=".7"/>
+    <rect x="20" y="13" width="16" height="9" rx="1" fill="#8b4513" stroke="#6b3410" strokeWidth=".7"/>
+    <rect x="38" y="13" width="16" height="9" rx="1" fill="#e69b00" stroke="#c2601a" strokeWidth=".7"/>
+    <rect x="2" y="24" width="16" height="9" rx="1" fill="#8b4513" stroke="#6b3410" strokeWidth=".7"/>
+    <rect x="20" y="24" width="16" height="9" rx="1" fill="#e69b00" stroke="#c2601a" strokeWidth=".7"/>
+    <rect x="38" y="24" width="16" height="9" rx="1" fill="#c2601a" stroke="#8a3e0e" strokeWidth=".7"/>
   </svg>
 );
 
+/* Катушка — форма песочных часов / двутавр */
 const KatushkaSvg = () => (
-  <svg width="48" height="32" viewBox="0 0 48 32" fill="none">
-    <path d="M6 1 C2 1 1 4 1 8 L1 24 C1 28 2 31 6 31 L12 31 C16 31 17 28 17 24 L17 8 C17 4 16 1 12 1 Z" fill="#c2601a" stroke="#a04e10" strokeWidth="1"/>
-    <path d="M22 1 C18 1 17 4 17 8 L17 24 C17 28 18 31 22 31 L28 31 C32 31 33 28 33 24 L33 8 C33 4 32 1 28 1 Z" fill="#d4782a" stroke="#a04e10" strokeWidth="1"/>
-    <path d="M38 1 C34 1 33 4 33 8 L33 24 C33 28 34 31 38 31 L42 31 C46 31 47 28 47 24 L47 8 C47 4 46 1 42 1 Z" fill="#c2601a" stroke="#a04e10" strokeWidth="1"/>
+  <svg width="56" height="40" viewBox="0 0 56 40" fill="none">
+    {/* Катушка 1 */}
+    <path d="M4 3 h10 v5 h-3 v18 h3 v5 h-10 v-5 h3 v-18 h-3 z" fill="#c2601a" stroke="#8a3e0e" strokeWidth=".7"/>
+    {/* Катушка 2 */}
+    <path d="M18 3 h10 v5 h-3 v18 h3 v5 h-10 v-5 h3 v-18 h-3 z" fill="#d4782a" stroke="#a04e10" strokeWidth=".7"/>
+    {/* Катушка 3 */}
+    <path d="M32 3 h10 v5 h-3 v18 h3 v5 h-10 v-5 h3 v-18 h-3 z" fill="#c2601a" stroke="#8a3e0e" strokeWidth=".7"/>
+    {/* Катушка 4 */}
+    <path d="M46 3 h8 v5 h-2 v18 h2 v5 h-8 v-5 h2 v-18 h-2 z" fill="#d4782a" stroke="#a04e10" strokeWidth=".7"/>
   </svg>
 );
 
@@ -68,7 +93,7 @@ const TileTypesSection = () => {
             <tbody>
               {tileTypes.map((t, i) => (
                 <tr key={i}>
-                  <td style={{ width: 64, textAlign: "center" }}>{t.icon}</td>
+                  <td style={{ width: 72, textAlign: "center" }}>{t.icon}</td>
                   <td className="tile-name">{t.name}</td>
                   <td className="tile-muted">{t.thickness}</td>
                   <td className="tile-muted">{t.purpose}</td>
