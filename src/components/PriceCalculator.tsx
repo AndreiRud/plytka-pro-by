@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Calculator } from "lucide-react";
+import "../styles.css";
 
 const priceItems = [
   { name: "Укладка тротуарной плитки на готовое основание", unit: "м²", price: 15, category: "Укладка" },
