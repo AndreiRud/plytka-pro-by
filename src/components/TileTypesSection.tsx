@@ -44,20 +44,26 @@ const ColormixSvg = () => (
   </svg>
 );
 
-/* Катушка — форма кости/двутавра как на фото */
+/* Катушка — кости сцепляются друг с другом, 2-3-2 */
 const KatushkaSvg = () => (
-  <svg width="56" height="40" viewBox="0 0 56 40" fill="none">
-    {/* Катушка — I-образная форма с закруглёнными краями */}
-    <path d="M4 2h8c0 0 0 3-3 5v6c3 2 3 5 3 5H4c0 0 0-3 3-5v-6C4 5 4 2 4 2z" fill="#b0b0b0" stroke="#888" strokeWidth=".6"/>
-    <path d="M15 2h8c0 0 0 3-3 5v6c3 2 3 5 3 5h-8c0 0 0-3 3-5v-6c-3-2-3-5-3-5z" fill="#c8b06a" stroke="#a08840" strokeWidth=".6"/>
-    <path d="M26 2h8c0 0 0 3-3 5v6c3 2 3 5 3 5h-8c0 0 0-3 3-5v-6c-3-2-3-5-3-5z" fill="#b0b0b0" stroke="#888" strokeWidth=".6"/>
-    <path d="M37 2h8c0 0 0 3-3 5v6c3 2 3 5 3 5h-8c0 0 0-3 3-5v-6c-3-2-3-5-3-5z" fill="#c8b06a" stroke="#a08840" strokeWidth=".6"/>
-    {/* Ряд 2 со сдвигом */}
-    <path d="M-1 20h8c0 0 0 3-3 5v6c3 2 3 5 3 5h-8c0 0 0-3 3-5v-6c-3-2-3-5-3-5z" fill="#c8b06a" stroke="#a08840" strokeWidth=".6"/>
-    <path d="M10 20h8c0 0 0 3-3 5v6c3 2 3 5 3 5h-8c0 0 0-3 3-5v-6c-3-2-3-5-3-5z" fill="#b0b0b0" stroke="#888" strokeWidth=".6"/>
-    <path d="M21 20h8c0 0 0 3-3 5v6c3 2 3 5 3 5h-8c0 0 0-3 3-5v-6c-3-2-3-5-3-5z" fill="#c8b06a" stroke="#a08840" strokeWidth=".6"/>
-    <path d="M32 20h8c0 0 0 3-3 5v6c3 2 3 5 3 5h-8c0 0 0-3 3-5v-6c-3-2-3-5-3-5z" fill="#b0b0b0" stroke="#888" strokeWidth=".6"/>
-    <path d="M43 20h8c0 0 0 3-3 5v6c3 2 3 5 3 5h-8c0 0 0-3 3-5v-6c-3-2-3-5-3-5z" fill="#c8b06a" stroke="#a08840" strokeWidth=".6"/>
+  <svg width="60" height="44" viewBox="0 0 60 44" fill="none">
+    {/* Ряд 1: 2 катушки */}
+    <path d="M2 1h10v4H9v4h3v4H2V9h3V5H2z" fill="#b0b0b0" stroke="#888" strokeWidth=".5"/>
+    <path d="M14 1h10v4h-3v4h3v4H14V9h3V5h-3z" fill="#c8b06a" stroke="#a08840" strokeWidth=".5"/>
+    {/* Ряд 2: 3 катушки, сдвинуты — входят в выемки ряда 1 */}
+    <path d="M-3 14h10v4H4v4h3v4H-3v-4h3v-4H-3z" fill="#c8b06a" stroke="#a08840" strokeWidth=".5"/>
+    <path d="M9 14h10v4h-3v4h3v4H9v-4h3v-4H9z" fill="#b0b0b0" stroke="#888" strokeWidth=".5"/>
+    <path d="M21 14h10v4h-3v4h3v4H21v-4h3v-4h-3z" fill="#c8b06a" stroke="#a08840" strokeWidth=".5"/>
+    {/* Ряд 3: 2 катушки */}
+    <path d="M2 27h10v4H9v4h3v4H2v-4h3v-4H2z" fill="#b0b0b0" stroke="#888" strokeWidth=".5"/>
+    <path d="M14 27h10v4h-3v4h3v4H14v-4h3v-4h-3z" fill="#c8b06a" stroke="#a08840" strokeWidth=".5"/>
+    {/* Дублируем правую часть для заполнения */}
+    <path d="M28 1h10v4h-3v4h3v4H28V9h3V5h-3z" fill="#b0b0b0" stroke="#888" strokeWidth=".5"/>
+    <path d="M33 14h10v4h-3v4h3v4H33v-4h3v-4h-3z" fill="#b0b0b0" stroke="#888" strokeWidth=".5"/>
+    <path d="M45 14h10v4h-3v4h3v4H45v-4h3v-4h-3z" fill="#c8b06a" stroke="#a08840" strokeWidth=".5"/>
+    <path d="M28 27h10v4h-3v4h3v4H28v-4h3v-4h-3z" fill="#b0b0b0" stroke="#888" strokeWidth=".5"/>
+    <path d="M40 1h10v4h-3v4h3v4H40V9h3V5h-3z" fill="#c8b06a" stroke="#a08840" strokeWidth=".5"/>
+    <path d="M40 27h10v4h-3v4h3v4H40v-4h3v-4h-3z" fill="#c8b06a" stroke="#a08840" strokeWidth=".5"/>
   </svg>
 );
 
