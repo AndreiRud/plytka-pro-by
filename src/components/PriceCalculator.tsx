@@ -2,39 +2,205 @@ import { useEffect, useRef } from "react";
 import { Calculator } from "lucide-react";
 import "../styles.css";
 
-const priceItems = [
-  { name: "Укладка тротуарной плитки на готовое основание", unit: "м²", price: 15, category: "Укладка" },
-  { name: "Укладка плитки, круговая выкладка", unit: "м²", price: 20, category: "Укладка" },
-  { name: "Укладка плитки, сложный рисунок", unit: "м²", price: 20, category: "Укладка" },
-  { name: "Укладка плитки Кирпичик", unit: "м²", price: 15, category: "Укладка" },
-  { name: "Укладка плитки Старый город", unit: "м²", price: 16, category: "Укладка" },
-  { name: "Укладка плитки Колормикс", unit: "м²", price: 16, category: "Укладка" },
-  { name: "Укладка плитки Катушка", unit: "м²", price: 17, category: "Укладка" },
-  { name: "Укладка под пешеходную зону", unit: "м²", price: 17, category: "Укладка" },
-  { name: "Укладка под автомобиль (до 3,5 т)", unit: "м²", price: 18, category: "Укладка" },
-  { name: "Укладка (несколько цветов)", unit: "м²", price: 20, category: "Укладка" },
-  { name: "Мощение гранитной брусчаткой на бетон", unit: "м²", price: 30, category: "Укладка" },
-  { name: "Установка тротуарного бордюра (прямые)", unit: "м.п.", price: 7, category: "Бордюры" },
-  { name: "Установка тротуарного бордюра (кривые)", unit: "м.п.", price: 8, category: "Бордюры" },
-  { name: "Установка дорожного борта (прямые)", unit: "м.п.", price: 9, category: "Бордюры" },
-  { name: "Установка дорожного борта (кривые)", unit: "м.п.", price: 10, category: "Бордюры" },
-  { name: "Основание из асфальтогранулята", unit: "м²", price: 2.5, category: "Основание" },
-  { name: "Песчаное основание до 20 см", unit: "м²", price: 2, category: "Основание" },
-  { name: "Монтаж бетонного основания", unit: "м²", price: 20, category: "Основание" },
-  { name: "Монтаж основания из щебня", unit: "м²", price: 3, category: "Основание" },
-  { name: "Подрезка тротуарной плитки", unit: "м.п.", price: 5, category: "Дополнительно" },
-  { name: "Прокладка труб для отвода воды", unit: "м.п.", price: 10, category: "Дополнительно" },
-  { name: "Установка дренажа", unit: "м.п.", price: 15, category: "Дополнительно" },
-  { name: "Установка продольных дождеприёмников", unit: "м.п.", price: 11, category: "Дополнительно" },
-  { name: "Установка точечного дождеприёмника", unit: "шт", price: 12, category: "Дополнительно" },
-  { name: "Демонтаж тротуарного борта", unit: "м.п.", price: 4, category: "Демонтаж" },
-  { name: "Демонтаж дорожного борта", unit: "м.п.", price: 5, category: "Демонтаж" },
-  { name: "Демонтаж тротуарной плитки", unit: "м²", price: 5, category: "Демонтаж" },
-  { name: "Выемка грунта вручную", unit: "м³", price: 30, category: "Земляные работы" },
-  { name: "Приготовление смесей вручную", unit: "м³", price: 40, category: "Земляные работы" },
+const priceData = [
+  {
+    group: "Подготовительные работы",
+    items: [
+      {
+        name: "Выемка грунта вручную до 20 см",
+        unit: "м²", price: 5,
+        details: ["Копание с погрузкой в тачку", "Вывоз до 20 м"]
+      },
+      {
+        name: "Основание из гравия до 20 см",
+        unit: "м²", price: 3,
+        details: ["Погрузка гравия с подвозом на тачке до 20 м", "Разравнивание", "Уплотнение виброплитой"]
+      },
+    ]
+  },
+  {
+    group: "Установка бордюра",
+    items: [
+      {
+        name: "Установка тротуарного бордюра (прямые)",
+        unit: "м.п.", price: 10,
+        details: [
+          "Разметка линии установки бордюра",
+          "Рытье траншеи (канавы) под бордюр",
+          "Замешивание бетона",
+          "Устройство бетонного основания (подбетонки)",
+          "Поднос бордюрных камней до 20 м",
+          "Укладка бордюрных камней на раствор",
+          "Выравнивание бордюра по уровню и шнуру (осевая, высотная)",
+          "Фиксация бордюра с боков бетонной смесью («замок» или забутовка)",
+          "Обратная засыпка грунта и уплотнение вокруг бордюра",
+          "Очистка бордюра от остатков раствора"
+        ]
+      },
+      {
+        name: "Установка тротуарного бордюра (кривые)",
+        unit: "м.п.", price: 12,
+        details: [
+          "Разметка линии установки бордюра",
+          "Рытье траншеи (канавы) под бордюр",
+          "Замешивание бетона",
+          "Устройство бетонного основания (подбетонки)",
+          "Запил бордюрного камня",
+          "Поднос бордюрных камней до 20 м",
+          "Укладка бордюрных камней на раствор",
+          "Выравнивание бордюра по уровню и шнуру (осевая, высотная)",
+          "Фиксация бордюра с боков бетонной смесью («замок» или забутовка)",
+          "Обратная засыпка грунта и уплотнение вокруг бордюра",
+          "Очистка бордюра от остатков раствора"
+        ]
+      },
+      {
+        name: "Установка дорожного борта (прямые)",
+        unit: "м.п.", price: 15,
+        details: [
+          "Разметка линии установки бордюра",
+          "Рытье траншеи (канавы) под бордюр",
+          "Замешивание бетона",
+          "Устройство бетонного основания (подбетонки)",
+          "Поднос бордюрных камней до 20 м",
+          "Укладка бордюрных камней на раствор",
+          "Выравнивание бордюра по уровню и шнуру (осевая, высотная)",
+          "Фиксация бордюра с боков бетонной смесью («замок» или забутовка)",
+          "Обратная засыпка грунта и уплотнение вокруг бордюра",
+          "Очистка бордюра от остатков раствора"
+        ]
+      },
+      {
+        name: "Установка дорожного борта (кривые)",
+        unit: "м.п.", price: 17,
+        details: [
+          "Разметка линии установки бордюра",
+          "Рытье траншеи (канавы) под бордюр",
+          "Замешивание бетона",
+          "Устройство бетонного основания (подбетонки)",
+          "Запил бордюрного камня",
+          "Поднос бордюрных камней до 20 м",
+          "Укладка бордюрных камней на раствор",
+          "Выравнивание бордюра по уровню и шнуру (осевая, высотная)",
+          "Фиксация бордюра с боков бетонной смесью («замок» или забутовка)",
+          "Обратная засыпка грунта и уплотнение вокруг бордюра",
+          "Очистка бордюра от остатков раствора"
+        ]
+      },
+    ]
+  },
+  {
+    group: "Укладка плитки",
+    items: [
+      {
+        name: "Укладка плитки Кирпичик или Катушка (прямые)",
+        unit: "м²", price: 17,
+        details: [
+          "Выравнивание основания (в среднем не более 10 см)",
+          "Уплотнение поверхности (виброплитой) с дополнительной досыпкой песка или гравия",
+          "Установка направляющих и маяков для уклона",
+          "Устройство подушки из цементно-песчаной смеси (ЦПС) или песка",
+          "Поднос плитки до 20 м",
+          "Укладка плитки на подготовленное основание",
+          "Регулировка уровня и уклона (простукивание киянкой)",
+          "Заполнение швов песком или ЦПС",
+          "Уплотнение поверхности (виброплитой)",
+          "Очистка плитки от остатков смеси"
+        ]
+      },
+      {
+        name: "Укладка плитки Старый город или Колормикс (прямые)",
+        unit: "м²", price: 18,
+        details: [
+          "Выравнивание основания с досыпкой гравия (в среднем не более 10 см)",
+          "Уплотнение поверхности (виброплитой) с дополнительной досыпкой песка или гравия",
+          "Установка направляющих и маяков для уклона",
+          "Устройство подушки из цементно-песчаной смеси (ЦПС) или песка",
+          "Поднос плитки до 20 м",
+          "Укладка плитки на подготовленное основание",
+          "Регулировка уровня и уклона (простукивание киянкой)",
+          "Заполнение швов песком или ЦПС",
+          "Уплотнение поверхности (виброплитой)",
+          "Очистка плитки от остатков смеси"
+        ]
+      },
+      {
+        name: "Укладка плитки Кирпичик или Катушка (кривые)",
+        unit: "м²", price: 19,
+        details: [
+          "Выравнивание основания (в среднем не более 10 см)",
+          "Уплотнение поверхности (виброплитой) с дополнительной досыпкой песка или гравия",
+          "Установка направляющих и маяков для уклона",
+          "Устройство подушки из цементно-песчаной смеси (ЦПС) или песка",
+          "Поднос плитки до 20 м",
+          "Укладка плитки на подготовленное основание",
+          "Регулировка уровня и уклона (простукивание киянкой)",
+          "Заполнение швов песком или ЦПС",
+          "Уплотнение поверхности (виброплитой)",
+          "Очистка плитки от остатков смеси"
+        ]
+      },
+      {
+        name: "Укладка плитки Старый город или Колормикс (кривые)",
+        unit: "м²", price: 20,
+        details: [
+          "Выравнивание основания с досыпкой гравия (в среднем не более 10 см)",
+          "Уплотнение поверхности (виброплитой) с дополнительной досыпкой песка или гравия",
+          "Установка направляющих и маяков для уклона",
+          "Устройство подушки из цементно-песчаной смеси (ЦПС) или песка",
+          "Поднос плитки до 20 м",
+          "Укладка плитки на подготовленное основание",
+          "Регулировка уровня и уклона (простукивание киянкой)",
+          "Заполнение швов песком или ЦПС",
+          "Уплотнение поверхности (виброплитой)",
+          "Очистка плитки от остатков смеси"
+        ]
+      },
+      {
+        name: "Запил",
+        unit: "м.п.", price: 15,
+        details: [
+          "Места где меняется ширина площадки или дорожки, идёт под углом, и требуется запиливать каждую плитку"
+        ]
+      },
+    ]
+  },
+  {
+    group: "Демонтаж",
+    items: [
+      {
+        name: "Демонтаж тротуарного борта",
+        unit: "м.п.", price: 4,
+        details: [
+          "Разрушение бетонного «замка» (боковой фиксации) с помощью лома или отбойного молотка",
+          "Подкоп под бордюр и расшатывание камня",
+          "Извлечение бордюра из траншеи",
+          "Очистка от остатков бетона (при условии откалывания за 1–2 удара кувалдочки)",
+          "Транспортировка до места складирования с разгрузкой, до 20 м"
+        ]
+      },
+      {
+        name: "Демонтаж дорожного борта",
+        unit: "м.п.", price: 8,
+        details: [
+          "Разрушение бетонного «замка» (боковой фиксации) с помощью лома или отбойного молотка",
+          "Подкоп под бордюр и расшатывание камня",
+          "Извлечение бордюра из траншеи",
+          "Очистка от остатков бетона (при условии откалывания за 1–2 удара кувалдочки)",
+          "Транспортировка до места складирования с разгрузкой, до 20 м"
+        ]
+      },
+      {
+        name: "Демонтаж тротуарной плитки",
+        unit: "м²", price: 5,
+        details: [
+          "Извлечение плитки вручную",
+          "Транспортировка до места складирования с разгрузкой, до 20 м"
+        ]
+      },
+    ]
+  },
 ];
-
-const categories = [...new Set(priceItems.map(i => i.category))];
 
 const PriceCalculator = () => {
   const root = useRef<HTMLDivElement>(null);
@@ -43,25 +209,29 @@ const PriceCalculator = () => {
     const el = root.current;
     if (!el) return;
 
-    const tabs = el.querySelectorAll<HTMLButtonElement>(".calc-tab");
-    const panels = el.querySelectorAll<HTMLDivElement>(".calc-panel");
     const inputs = el.querySelectorAll<HTMLInputElement>(".calc-qty");
     const list = el.querySelector<HTMLDivElement>(".calc-summary-list")!;
     const empty = el.querySelector<HTMLParagraphElement>(".calc-summary-empty")!;
     const total = el.querySelector<HTMLSpanElement>(".calc-total-value")!;
 
-    function showTab(cat: string) {
-      tabs.forEach(t => t.classList.toggle("active", t.dataset.cat === cat));
-      panels.forEach(p => p.style.display = p.dataset.cat === cat ? "" : "none");
-    }
+    // Toggle details
+    el.querySelectorAll<HTMLButtonElement>(".calc-toggle").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const details = btn.closest(".calc-row")!.querySelector<HTMLDivElement>(".calc-details")!;
+        const open = details.style.display !== "none";
+        details.style.display = open ? "none" : "block";
+        btn.textContent = open ? "Что входит ▼" : "Свернуть ▲";
+      });
+    });
 
     function update() {
       let sum = 0;
       let html = "";
+      const allItems = priceData.flatMap(g => g.items);
       inputs.forEach(inp => {
         const qty = parseInt(inp.value) || 0;
         const i = parseInt(inp.dataset.idx!);
-        const item = priceItems[i];
+        const item = allItems[i];
         const row = inp.closest(".calc-row") as HTMLDivElement;
         if (qty > 0) {
           sum += item.price * qty;
@@ -76,8 +246,6 @@ const PriceCalculator = () => {
       empty.style.display = html ? "none" : "";
       total.textContent = sum.toFixed(0) + " бел. руб.";
     }
-
-    tabs.forEach(t => t.addEventListener("click", () => showTab(t.dataset.cat!)));
 
     el.querySelectorAll<HTMLButtonElement>(".calc-btn-minus").forEach(btn => {
       btn.addEventListener("click", () => {
@@ -96,9 +264,10 @@ const PriceCalculator = () => {
     });
 
     inputs.forEach(inp => inp.addEventListener("input", update));
-    showTab(categories[0]);
     update();
   }, []);
+
+  let globalIdx = 0;
 
   return (
     <section id="calculator" className="calc-section">
@@ -115,31 +284,34 @@ const PriceCalculator = () => {
         </div>
 
         <div className="calc-grid">
-          <div>
-            <div className="calc-tabs">
-              {categories.map(cat => (
-                <button key={cat} className="calc-tab" data-cat={cat}>{cat}</button>
-              ))}
-            </div>
-
-            {categories.map(cat => (
-              <div key={cat} className="calc-panel" data-cat={cat} style={{ display: "none" }}>
-                {priceItems.map((item, idx) => {
-                  if (item.category !== cat) return null;
+          <div className="calc-items">
+            {priceData.map((group) => (
+              <div key={group.group} className="calc-group">
+                <h3 className="calc-group-title">{group.group}</h3>
+                {group.items.map((item) => {
+                  const idx = globalIdx++;
                   return (
                     <div key={idx} className="calc-row">
-                      <div className="calc-row-info">
-                        <p className="calc-row-name">{item.name}</p>
-                        <p className="calc-row-price">от {item.price} бел. руб./{item.unit}</p>
+                      <div className="calc-row-top">
+                        <div className="calc-row-info">
+                          <p className="calc-row-name">{item.name}</p>
+                          <p className="calc-row-price">от {item.price} бел. руб./{item.unit}</p>
+                          <button type="button" className="calc-toggle">Что входит ▼</button>
+                        </div>
+                        <div className="calc-controls">
+                          <button className="calc-btn-minus" type="button">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/></svg>
+                          </button>
+                          <input type="number" min={0} defaultValue={0} className="calc-qty" data-idx={idx} />
+                          <button className="calc-btn-plus" type="button">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                          </button>
+                        </div>
                       </div>
-                      <div className="calc-controls">
-                        <button className="calc-btn-minus">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/></svg>
-                        </button>
-                        <input type="number" min={0} defaultValue={0} className="calc-qty" data-idx={idx} />
-                        <button className="calc-btn-plus">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                        </button>
+                      <div className="calc-details" style={{ display: "none" }}>
+                        <ul className="calc-details-list">
+                          {item.details.map((d, di) => <li key={di}>{d}</li>)}
+                        </ul>
                       </div>
                     </div>
                   );
