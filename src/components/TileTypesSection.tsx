@@ -68,10 +68,10 @@ const KatushkaSvg = () => (
 );
 
 const tileTypes = [
-  { name: "Кирпичик", thickness: "6–8 см", purpose: "Дорожки, отмостка, пешеходные зоны", price: "от 15", icon: <BrickSvg /> },
-  { name: "Старый город", thickness: "6–8 см", purpose: "Дворовые площадки, зоны отдыха", price: "от 16", icon: <OldTownSvg /> },
-  { name: "Колормикс", thickness: "6–8 см", purpose: "Декоративное мощение в несколько цветов", price: "от 16", icon: <ColormixSvg /> },
-  { name: "Катушка (косточка)", thickness: "8 см", purpose: "Площадки средней нагрузки", price: "от 17", icon: <KatushkaSvg /> },
+  { name: "Кирпичик", thickness: "6–8 см", purpose: "Дорожки, отмостка, пешеходные зоны", price: "от 20", icon: <BrickSvg /> },
+  { name: "Старый город", thickness: "6–8 см", purpose: "Дворовые площадки, зоны отдыха", price: "от 21", icon: <OldTownSvg /> },
+  { name: "Колормикс", thickness: "6–8 см", purpose: "Декоративное мощение в несколько цветов", price: "от 21", icon: <ColormixSvg /> },
+  { name: "Катушка (косточка)", thickness: "8 см", purpose: "Площадки средней нагрузки", price: "от 20", icon: <KatushkaSvg /> },
 ];
 
 const TileTypesSection = () => {
