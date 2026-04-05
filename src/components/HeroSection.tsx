@@ -12,7 +12,7 @@ const HeroSection = () => {
         </div>
         <h1 className="hero-title">Укладка тротуарной плитки в Пружанах</h1>
         <p className="hero-price">
-          Цена от <span>15 бел. руб./м²</span>
+          Цена от <span>20 бел. руб./м²</span>
         </p>
         <p className="hero-desc">
           Договор, качественное выполнение работ. Без предоплаты — оплата по факту.
