@@ -28,5 +28,88 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function initCalc() {
+          var el = document.getElementById("calc-root");
+          if (!el) {
+            setTimeout(initCalc, 200);
+            return;
+          }
+
+          var inputs = el.querySelectorAll(".calc-qty");
+          var list = el.querySelector(".calc-summary-list");
+          var empty = el.querySelector(".calc-summary-empty");
+          var total = el.querySelector(".calc-total-value");
+
+          el.querySelectorAll(".calc-toggle").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var details = btn.closest(".calc-row").querySelector(".calc-details");
+              var isOpen = details.style.display !== "none";
+              details.style.display = isOpen ? "none" : "block";
+              btn.textContent = isOpen ? "Что входит ▼" : "Свернуть ▲";
+            });
+          });
+
+          function update() {
+            var sum = 0;
+            var html = "";
+
+            inputs.forEach(function (inp) {
+              var qty = parseInt(inp.value) || 0;
+              var row = inp.closest(".calc-row");
+              var price = parseFloat(row.dataset.price);
+              var unit = row.dataset.unit;
+              var name = row.dataset.name;
+
+              if (qty > 0) {
+                var lineTotal = qty * price;
+                sum += lineTotal;
+                html +=
+                  '<div class="calc-summary-row">' +
+                    '<span class="calc-summary-name">' + name + "</span>" +
+                    '<span class="calc-summary-val">' +
+                      qty + " " + unit + " × " + price + " = " + lineTotal + " р." +
+                    "</span>" +
+                  "</div>";
+                row.classList.add("selected");
+              } else {
+                row.classList.remove("selected");
+              }
+            });
+
+            list.innerHTML = html;
+            list.style.display = html ? "" : "none";
+            empty.style.display = html ? "none" : "";
+            total.textContent = sum + " бел. руб.";
+          }
+
+          el.querySelectorAll(".calc-btn-minus").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var inp = btn.parentElement.querySelector("input");
+              inp.value = Math.max(0, (parseInt(inp.value) || 0) - 1);
+              update();
+            });
+          });
+
+          el.querySelectorAll(".calc-btn-plus").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var inp = btn.parentElement.querySelector("input");
+              inp.value = (parseInt(inp.value) || 0) + 1;
+              update();
+            });
+          });
+
+          inputs.forEach(function (inp) {
+            inp.addEventListener("input", update);
+          });
+
+          update();
+        }
+
+        initCalc();
+      });
+    </script>
   </body>
 </html>
