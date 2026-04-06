@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-import { Calculator } from "lucide-react";
 import "../styles.css";
 
 const priceData = [
@@ -224,88 +222,23 @@ const priceData = [
 ];
 
 const PriceCalculator = () => {
-  const root = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = root.current;
-    if (!el) return;
-
-    const inputs = el.querySelectorAll<HTMLInputElement>(".calc-qty");
-    const list = el.querySelector<HTMLDivElement>(".calc-summary-list")!;
-    const empty = el.querySelector<HTMLParagraphElement>(".calc-summary-empty")!;
-    const total = el.querySelector<HTMLSpanElement>(".calc-total-value")!;
-
-    el.querySelectorAll<HTMLButtonElement>(".calc-toggle").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const details = btn.closest(".calc-row")!.querySelector<HTMLDivElement>(".calc-details")!;
-        const isOpen = details.style.display !== "none";
-        details.style.display = isOpen ? "none" : "block";
-        btn.textContent = isOpen ? "Что входит ▼" : "Свернуть ▲";
-      });
-    });
-
-    function update() {
-      let sum = 0;
-      let html = "";
-      const allItems = priceData.flatMap((g) => g.items);
-
-      inputs.forEach((inp) => {
-        const qty = parseInt(inp.value) || 0;
-        const i = parseInt(inp.dataset.idx!);
-        const item = allItems[i];
-        const row = inp.closest(".calc-row") as HTMLDivElement;
-
-        if (qty > 0) {
-          const lineTotal = qty * item.price;
-          sum += lineTotal;
-          html +=
-            '<div class="calc-summary-row">' +
-              '<span class="calc-summary-name">' + item.name + "</span>" +
-              '<span class="calc-summary-val">' +
-                qty + " " + item.unit + " × " + item.price + " = " + lineTotal.toFixed(0) + " р." +
-              "</span>" +
-            "</div>";
-          row.classList.add("selected");
-        } else {
-          row.classList.remove("selected");
-        }
-      });
-
-      list.innerHTML = html;
-      list.style.display = html ? "" : "none";
-      empty.style.display = html ? "none" : "";
-      total.textContent = sum.toFixed(0) + " бел. руб.";
-    }
-
-    el.querySelectorAll<HTMLButtonElement>(".calc-btn-minus").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const inp = btn.parentElement!.querySelector("input") as HTMLInputElement;
-        inp.value = String(Math.max(0, (parseInt(inp.value) || 0) - 1));
-        update();
-      });
-    });
-
-    el.querySelectorAll<HTMLButtonElement>(".calc-btn-plus").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const inp = btn.parentElement!.querySelector("input") as HTMLInputElement;
-        inp.value = String((parseInt(inp.value) || 0) + 1);
-        update();
-      });
-    });
-
-    inputs.forEach((inp) => inp.addEventListener("input", update));
-    update();
-  }, []);
-
   let globalIdx = 0;
 
   return (
     <section id="calculator" className="calc-section">
-      <div className="container" ref={root}>
+      <div className="container" id="calc-root">
 
         <div className="calc-header">
           <div className="calc-badge">
-            <Calculator size={16} />
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="4" y="2" width="16" height="20" rx="2" />
+              <line x1="8" y1="6" x2="16" y2="6" />
+              <line x1="8" y1="10" x2="10" y2="10" />
+              <line x1="14" y1="10" x2="16" y2="10" />
+              <line x1="8" y1="14" x2="10" y2="14" />
+              <line x1="14" y1="14" x2="16" y2="14" />
+              <line x1="8" y1="18" x2="16" y2="18" />
+            </svg>
             <span>Калькулятор</span>
           </div>
 
@@ -329,7 +262,7 @@ const PriceCalculator = () => {
                 {group.items.map((item) => {
                   const idx = globalIdx++;
                   return (
-                    <div key={idx} className="calc-row">
+                    <div key={idx} className="calc-row" data-price={item.price} data-unit={item.unit} data-name={item.name}>
 
                       <div className="calc-row-top">
                         <div className="calc-row-info">
@@ -354,7 +287,6 @@ const PriceCalculator = () => {
                             min={0}
                             defaultValue={0}
                             className="calc-qty"
-                            data-idx={idx}
                           />
 
                           <button className="calc-btn-plus" type="button">
