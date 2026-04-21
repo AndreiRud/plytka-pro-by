@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
-import "../styles.css";
 
 const navLinks = [
   { href: "#advantages", label: "Преимущества" },

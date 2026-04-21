@@ -1,5 +1,3 @@
-import "../styles.css";
-
 const priceData = [
   {
     group: "Подготовительные работы",
