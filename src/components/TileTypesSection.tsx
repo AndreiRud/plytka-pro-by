@@ -124,7 +124,7 @@ const TileTypesSection = () => {
             <tbody>
               {tileTypes.map((t, i) => (
                 <tr key={i}>
-                  <td className="tile-icon-cell">{t.icon}</td>
+                  <td>{t.icon}</td>
                   <td className="tile-name">{t.name}</td>
                   <td className="tile-muted">{t.thickness}</td>
                   <td className="tile-muted">{t.purpose}</td>
