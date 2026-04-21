@@ -11,17 +11,17 @@ const AboutSection = () => {
       <div className="container">
 
         <h2 className="section-title">
-            Об <span className="text-gradient">ИП Якутчик А.С.</span>
-          </h2>
+          Об <span className="text-gradient">ИП Якутчик А.С.</span>
+        </h2>
 
-          <div className="about-stats">
-            {stats.map((s, i) => (
-              <div key={i} className="about-stat">
-                <p className="about-stat-value">{s.value}</p>
-                <p className="about-stat-label">{s.label}</p>
-              </div>
-            ))}
-          </div>
+        <div className="about-stats">
+          {stats.map((s, i) => (
+            <div key={i} className="about-stat">
+              <p className="about-stat-value">{s.value}</p>
+              <p className="about-stat-label">{s.label}</p>
+            </div>
+          ))}
+        </div>
 
         <div className="about-text">
           <p>
