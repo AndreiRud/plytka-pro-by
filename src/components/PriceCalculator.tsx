@@ -251,7 +251,7 @@ const PriceCalculator = () => {
 
         <div className="calc-grid">
 
-          <div className="calc-items">
+          <div>
             {priceData.map((group) => (
               <div key={group.group} className="calc-group">
 
